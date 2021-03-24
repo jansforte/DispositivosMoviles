@@ -12,6 +12,7 @@ public class Registro extends AppCompatActivity implements AdapterView.OnItemSel
     private String genero="";
     private String profesion="";
     private String item="";
+    private boolean otroP=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,7 @@ public class Registro extends AppCompatActivity implements AdapterView.OnItemSel
 
         nombre = findViewById(R.id.nombre);
         fecha = findViewById(R.id.fechaNacimiento);
+        profesionOtra =  findViewById(R.id.estudioOtro);
 
         Spinner spinner = findViewById(R.id.profesion);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -50,14 +52,12 @@ public class Registro extends AppCompatActivity implements AdapterView.OnItemSel
             case R.id.estudio:
                 if(escogido){
                     profesion = "Ingeniero "+item;
+                    otroP=false;
                 }
                 break;
             case R.id.estudioOtro:
                 if(escogido){
-                    profesionOtra =  findViewById(R.id.estudioOtro);
-                    profesion = validar(profesionOtra);
-                    if(profesion.isEmpty())
-                        profesion="Otra";
+                    otroP=true;
                 }
                 break;
         }
@@ -77,6 +77,11 @@ public class Registro extends AppCompatActivity implements AdapterView.OnItemSel
     public void visualizar(View h){
         String nombreU = validar(nombre);
         if(!nombreU.isEmpty()){
+            if(otroP){
+                profesion = validar(profesionOtra);
+                if(profesion.isEmpty())
+                    profesion="Otra";
+            }
             Intent ir = new Intent(this,Informe.class);
             volver(ir);
             Bundle datos = new Bundle();
@@ -90,6 +95,13 @@ public class Registro extends AppCompatActivity implements AdapterView.OnItemSel
             Toast.makeText(this,"Por favor llene todos los campos",Toast.LENGTH_LONG);
         }
     }
+
+    public void Atras(View h){
+        Intent ir = new Intent(this,MainActivity.class);
+        volver(ir);
+        startActivity(ir);
+    }
+
     private void volver(Intent i){
         i.addFlags(i.FLAG_ACTIVITY_CLEAR_TASK | i.FLAG_ACTIVITY_CLEAR_TOP);
     }
