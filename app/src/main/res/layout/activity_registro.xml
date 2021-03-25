@@ -49,12 +49,14 @@
                 android:textSize="22sp"/>
         <EditText
                 android:id="@+id/fechaNacimiento"
+                android:hint="Ingrese su fecha de nacimiento"
                 android:layout_marginLeft="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="date"
-                android:ems="10"
-                android:textSize="22sp"/>
+                android:focusable="false"
+                android:clickable="true"
+                android:maxLines="1"/>
 
     </LinearLayout>
 

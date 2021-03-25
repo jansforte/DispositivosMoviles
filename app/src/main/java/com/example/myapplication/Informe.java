@@ -3,8 +3,13 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import java.time.LocalDate;
+import java.time.Period;
+
 
 public class Informe extends AppCompatActivity {
 
@@ -24,7 +29,8 @@ public class Informe extends AppCompatActivity {
 
         Bundle datos = getIntent().getExtras();
         nombre.setText("Nombre: "+datos.getString("nombre"));
-        edad.setText("Edad: "+datos.getString("fecha"));
+
+        edad.setText("Nació el: "+datos.getString("fecha"));
         genero.setText("Genero: "+datos.getString("genero"));
         profesion.setText("Profesion: "+datos.getString("profesion"));
 

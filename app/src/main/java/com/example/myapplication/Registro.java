@@ -1,15 +1,17 @@
 package com.example.myapplication;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.fragment.app.DialogFragment;
 
 public class Registro extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private EditText nombre,fecha, profesionOtra;
-    private String genero="";
+    private String genero="Masculino";
     private String profesion="";
     private String item="";
     private Spinner spinner;
@@ -31,6 +33,12 @@ public class Registro extends AppCompatActivity implements AdapterView.OnItemSel
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
+        fecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog();
+            }
+        });
     }
 
     public void onRadioGenero(View v){
@@ -81,7 +89,7 @@ public class Registro extends AppCompatActivity implements AdapterView.OnItemSel
 
     public void visualizar(View h){
         String nombreU = validar(nombre);
-        if(!nombreU.isEmpty()){
+        if(!nombreU.isEmpty() && !fecha.getText().toString().isEmpty()){
             if(otroP){
                 profesion = validar(profesionOtra);
                 if(profesion.isEmpty())
@@ -113,5 +121,19 @@ public class Registro extends AppCompatActivity implements AdapterView.OnItemSel
 
     private String validar(EditText dato){
         return dato.getText().toString().trim();
+    }
+
+    private void showDatePickerDialog() {
+
+        DialogFragment newFragment = new DatePickerFragment().devover(new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                // +1 because January is zero
+                final String selectedDate = dayOfMonth + " / " + (month+1) + " / " + year;
+                fecha.setText(selectedDate);
+            }
+        });
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+
     }
 }
