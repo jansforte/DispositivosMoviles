@@ -12,6 +12,7 @@ public class Registro extends AppCompatActivity implements AdapterView.OnItemSel
     private String genero="";
     private String profesion="";
     private String item="";
+    private Spinner spinner;
     private boolean otroP=false;
 
     @Override
@@ -21,9 +22,9 @@ public class Registro extends AppCompatActivity implements AdapterView.OnItemSel
 
         nombre = findViewById(R.id.nombre);
         fecha = findViewById(R.id.fechaNacimiento);
-        profesionOtra =  findViewById(R.id.estudioOtro);
+        profesionOtra =  findViewById(R.id.profesionOtra);
 
-        Spinner spinner = findViewById(R.id.profesion);
+        spinner = findViewById(R.id.profesionall);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this,R.array.estudio_array,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -51,12 +52,16 @@ public class Registro extends AppCompatActivity implements AdapterView.OnItemSel
         switch (v.getId()){
             case R.id.estudio:
                 if(escogido){
-                    profesion = "Ingeniero "+item;
+                    spinner.setVisibility(View.VISIBLE);
+                    profesionOtra.setVisibility(View.GONE);
+                    profesion = "Ingeniero "+spinner.getItemAtPosition(spinner.getSelectedItemPosition()).toString();
                     otroP=false;
                 }
                 break;
             case R.id.estudioOtro:
                 if(escogido){
+                    spinner.setVisibility(View.GONE);
+                    profesionOtra.setVisibility(View.VISIBLE);
                     otroP=true;
                 }
                 break;
@@ -66,7 +71,7 @@ public class Registro extends AppCompatActivity implements AdapterView.OnItemSel
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         item = parent.getItemAtPosition(position).toString();
-        Toast.makeText(this,"Item "+item,Toast.LENGTH_LONG);
+        profesion = "Ingeniero "+item;
     }
 
     @Override
@@ -92,7 +97,7 @@ public class Registro extends AppCompatActivity implements AdapterView.OnItemSel
             ir.putExtras(datos);
             startActivity(ir);
         }else{
-            Toast.makeText(this,"Por favor llene todos los campos",Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(),"Por favor llene todos los campos",Toast.LENGTH_LONG).show();
         }
     }
 

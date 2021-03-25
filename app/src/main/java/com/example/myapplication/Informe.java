@@ -37,6 +37,7 @@ public class Informe extends AppCompatActivity {
                 break;
             case "Ingeniero Sistemas":
                 imagen.setImageResource(R.drawable.informatico);
+                break;
             default:
                 imagen.setImageResource(R.drawable.otro);
                 break;

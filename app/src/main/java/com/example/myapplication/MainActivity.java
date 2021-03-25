@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
@@ -26,19 +27,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnInterface = findViewById(R.id.btnInterface);
 
         btnInterface.setOnClickListener(this);
-        btnDelegado.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnInterface:
-                Toast.makeText(getApplicationContext(),"Este es el botón Interface",Toast.LENGTH_LONG);
-                break;
-            case R.id.btnDelegado:
-                Intent i = new Intent(this,Registro.class);
-                volver(i);
-                startActivity(i);
+                Toast.makeText(getApplicationContext(),"Este es el botón Interface",Toast.LENGTH_LONG).show();
                 break;
             default: break;
         }
@@ -56,8 +51,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ir.putExtras(datos);
             startActivity(ir);
         }else{
-            Toast.makeText(this,"Por favor llene todos los campos",Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(),"Por favor llene todos los campos",Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void holi(View h){
+        Intent i = new Intent(this,Registro.class);
+        volver(i);
+        startActivity(i);
     }
 
     private void volver(Intent i){

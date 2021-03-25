@@ -59,6 +59,7 @@
     />
 
     <Button
+            android:onClick="holi"
             android:id="@+id/btnDelegado"
             android:layout_marginTop="5dp"
             android:layout_marginHorizontal="40dp"
